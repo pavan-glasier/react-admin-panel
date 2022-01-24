@@ -128,8 +128,13 @@ export const Dashboard = () => {
                                             <div className="row mb-0">
                                                 <div className="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                                     <div className="list-inline text-center">
-                                                        <div className="list-inline-item p-r-30"><i data-feather="arrow-up-circle"
-                                                            className="col-green"></i>
+                                                        <div className="list-inline-item p-r-30">
+                                                        {/* <i data-feather="arrow-up-circle" className="col-green"></i> */}
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-arrow-up-circle col-green">
+                                                        <circle cx="12" cy="12" r="10"></circle>
+                                                        <polyline points="16 12 12 8 8 12"></polyline>
+                                                        <line x1="12" y1="16" x2="12" y2="8"></line>
+                                                        </svg>
                                                             <h5 className="m-b-0">$675</h5>
                                                             <p className="text-muted font-14 m-b-0">Weekly Earnings</p>
                                                         </div>

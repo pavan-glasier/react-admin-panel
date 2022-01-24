@@ -333,6 +333,7 @@ const Header = () => {
                                 <span>Forms</span>
                             </Link>
                             <ul className="dropdown-menu">
+                                <li><Link to="/local-form" className="nav-link">Form Local</Link></li>
                                 <li><Link to="/basic-form" className="nav-link">Basic Form</Link></li>
                                 <li><Link to="/advanced-form" className="nav-link">Advanced Form</Link></li>
                                 <li><Link to="/editor-form" className="nav-link">Editor</Link></li>
