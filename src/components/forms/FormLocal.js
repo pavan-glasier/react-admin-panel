@@ -7,7 +7,6 @@ export const FormLocal = () => {
     
     const onSubmit = (data) => {
         localStorage.setItem("formData", JSON.stringify(data));
-        
     }
     return (
         <>

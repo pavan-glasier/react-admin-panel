@@ -11,6 +11,7 @@ import {
   Routes,
   Route
 } from "react-router-dom";
+import Formdemo from "./components/Formdemo";
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/basic-form" element={<Basicform />} />
           <Route path="/local-form" element={<FormLocal />} />
+          <Route path="/demo-form" element={<Formdemo />} />
         </Routes>
         <Footer />
       </BrowserRouter>
