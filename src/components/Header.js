@@ -1,6 +1,4 @@
 import React from 'react';
-// import Navbar from './Navbar';
-// import Sidebar from './Sidebar';
 import {
     BrowserRouter as Router,
     Link
@@ -169,11 +167,16 @@ const Header = () => {
                             className="user-img-radious-style" /> <span className="d-sm-none d-lg-inline-block"></span></a>
                         <div className="dropdown-menu dropdown-menu-right pullDown">
                             <div className="dropdown-title">Hello Sarah Smith</div>
-                            <a href="profile.html" className="dropdown-item has-icon"> <i className="far
-										fa-user"></i> Profile
-                            </a> <a href="timeline.html" className="dropdown-item has-icon"> <i className="fas fa-bolt"></i>
+                            
+                            <Link to="/" className="dropdown-item has-icon">
+                            <i className="far fa-user"></i> Profile
+                            </Link>
+                            <Link to="/register" className="dropdown-item has-icon">
+                            <i className="far fa-user"></i> Register
+                            </Link>
+                            <a href="/" className="dropdown-item has-icon"> <i className="fas fa-bolt"></i>
                                 Activities
-                            </a> <a href="#" className="dropdown-item has-icon"> <i className="fas fa-cog"></i>
+                            </a> <a href="/" className="dropdown-item has-icon"> <i className="fas fa-cog"></i>
                                 Settings
                             </a>
                             <div className="dropdown-divider"></div>

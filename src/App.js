@@ -13,16 +13,17 @@ import {
 } from "react-router-dom";
 import Formdemo from "./components/Formdemo";
 import Localdemo from "./components/Localdemo";
+import Login from "./Authentication/Login";
+import Register from "./Authentication/Register";
 
 
 
 function App() {
   return (
     <>
-    {/* <Dashboard /> */}
-    
       <BrowserRouter>
-        <Header />
+        {/* <Login /> */}
+        {/* <Header /> */}
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/dashboard" element={<Dashboard />} />
@@ -30,8 +31,9 @@ function App() {
           <Route path="/local-form" element={<FormLocal />} />
           <Route path="/demo-form" element={<Formdemo />} />
           <Route path="/local-demo" element={<Localdemo />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
-        <Footer />
+        {/* <Footer /> */}
       </BrowserRouter>
     </>
   );
