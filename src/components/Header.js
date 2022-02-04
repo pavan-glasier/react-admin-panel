@@ -4,8 +4,9 @@ import {
     Link
 } from "react-router-dom";
 const Header = () => {
-    return (
+    const Hheader = (
         <>
+        
             <div className="navbar-bg"></div>
             <nav className="navbar navbar-expand-lg main-navbar sticky">
                 <div className="form-inline mr-auto">
@@ -490,6 +491,12 @@ const Header = () => {
                 </aside>
             </div>
         </>
+    );
+    return (
+        <>
+        {Hheader}
+        </>
+        
     )
 }
 

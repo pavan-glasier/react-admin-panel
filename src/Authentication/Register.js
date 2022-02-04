@@ -1,39 +1,43 @@
 import React, { Component } from 'react';
-
+// import { useNavigate } from "react-router-dom";
 export default class Register extends Component {
-    constructor(){
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             firstName: '',
             lastName: '',
             email: '',
             password: '',
-            authUser : JSON.parse(localStorage.getItem('registerData'))
-          };
-          this.onSubmit = this.onSubmit.bind(this);
+            authUser: JSON.parse(localStorage.getItem('registerData')),
+            redirect: null
+        };
+        this.onSubmit = this.onSubmit.bind(this);
     }
 
     onSubmit = (e) => {
         e.preventDefault();
-        let formData = new FormData();
-        console.log(this.firstName.value);
-        formData.append('firstName', this.firstName.value);
-        formData.append('lastName', this.lastName.value);
-        formData.append('email', this.email.value);
-        formData.append('password', this.password.value);
-        let obj = JSON.stringify(formData);
-        let fdata = [];
-        fdata = JSON.parse(localStorage.getItem('registerData')) || [];
-        // fdata.push(obj);
-        localStorage.setItem('registerData', JSON.stringify(formData));
 
-        // this.setState({
-        //     firstName: this.firstName.value,
-        //     lastName: this.lastName.value,
-        //     email: this.email.value,
-        //     password: this.password.value,
-        //     authUser: JSON.parse(localStorage.getItem('registerData'))
-        // })
+        const formData = {
+            firstName: this.firstName.value,
+            lastName: this.lastName.value,
+            email: this.email.value,
+            password: this.password.value
+        }
+
+        if (formData) {
+            let fdata = [];
+            fdata = JSON.parse(localStorage.getItem('registerData')) || [];
+            fdata.push(formData);
+            localStorage.setItem('registerData', JSON.stringify(fdata));
+
+            this.setState({
+                firstName: this.firstName.value,
+                lastName: this.lastName.value,
+                email: this.email.value,
+                password: this.password.value,
+                authUser: JSON.parse(localStorage.getItem('registerData'))
+            })
+        }
     }
 
     render() {
@@ -62,18 +66,18 @@ export default class Register extends Component {
                                             <div className="form-group">
                                                 <label htmlFor="email">Email</label>
                                                 <input id="email" type="email" className="form-control" ref={(e) => this.email = e} name="email" />
-                                                    <div className="invalid-feedback">
-                                                    </div>
+                                                <div className="invalid-feedback">
+                                                </div>
                                             </div>
                                             <div className="row">
                                                 <div className="form-group col-6">
                                                     <label htmlFor="password" className="d-block">Password</label>
                                                     <input id="password" type="password" className="form-control pwstrength" data-indicator="pwindicator"
                                                         ref={(e) => this.password = e} name="password" />
-                                                        <div id="pwindicator" className="pwindicator">
-                                                            <div className="bar"></div>
-                                                            <div className="label"></div>
-                                                        </div>
+                                                    <div id="pwindicator" className="pwindicator">
+                                                        <div className="bar"></div>
+                                                        <div className="label"></div>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div className="form-group">

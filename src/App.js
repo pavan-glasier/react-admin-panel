@@ -3,8 +3,8 @@ import React from "react";
 import Dashboard from "./components/Dashboard";
 import Basicform from "./components/forms/Basicform";
 import FormLocal from "./components/forms/FormLocal";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+// import Header from "./components/Header";
+// import Footer from "./components/Footer";
 
 import {
   BrowserRouter,
@@ -13,14 +13,17 @@ import {
 } from "react-router-dom";
 import Formdemo from "./components/Formdemo";
 import Localdemo from "./components/Localdemo";
-import Login from "./Authentication/Login";
+// import Login from "./Authentication/Login";
 import Register from "./Authentication/Register";
-
+// import { useNavigate } from "react-router-dom";
 
 
 function App() {
+  // let navigate = useNavigate();
+        // navigate("/home");
   return (
     <>
+
       <BrowserRouter>
         {/* <Login /> */}
         {/* <Header /> */}
@@ -35,6 +38,7 @@ function App() {
         </Routes>
         {/* <Footer /> */}
       </BrowserRouter>
+      {/* <button onClick={handleClick}>Click to navigate about page</button> */}
     </>
   );
 }

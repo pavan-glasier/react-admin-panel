@@ -9,6 +9,7 @@ export const Basicform = () => {
     const [authUser, setauthUser] = useState(JSON.parse(localStorage.getItem('formData')));
 
     const onSubmit = (formData) => {
+        console.log(formData);
         let fdata = [];
         fdata = JSON.parse(localStorage.getItem('formData')) || [];
         fdata.push(formData);
