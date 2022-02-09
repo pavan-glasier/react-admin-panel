@@ -1,14 +1,15 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useState, useEffect } from "react";
+import { Link, useNavigate } from 'react-router-dom';
+
 // import axios from 'axios';
 const Register = () => {
-
+    let navigate = useNavigate();
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [authUser, setauthUser] = useState(JSON.parse(localStorage.getItem('registerData')));
     const [msg, setMsg] = useState('');
     console.log(authUser);
-
 
     useEffect(() => {
         getList();
@@ -19,7 +20,7 @@ const Register = () => {
             .then((result) => {
                 result.json()
                     .then((resp) => {
-                        console.log("register-fetch-all",resp)
+                        console.log("register-fetch-all", resp)
                         setauthUser(localStorage.setItem('registerData', JSON.stringify(resp)));
                         setMsg(resp.message)
                     })
@@ -29,10 +30,10 @@ const Register = () => {
 
         // if (formData) {
         //     let fdata = [];
-        //     fdata = JSON.parse(localStorage.getItem('registerData')) || [];
+        //     fdata = JSON.parse(sessionStorage.getItem('registerData')) || [];
         //     fdata.push(formData);
-        //     localStorage.setItem('registerData', JSON.stringify(fdata));
-        //     setauthUser(JSON.parse(localStorage.getItem('registerData')));
+        //     sessionStorage.setItem('registerData', JSON.stringify(fdata));
+        //     setauthUser(JSON.parse(sessionStorage.getItem('registerData')));
         // }
 
         fetch(`http://192.168.0.128/php-rest-api/register-insert.php`, {
@@ -48,6 +49,12 @@ const Register = () => {
                     console.log(resp)
                     setMsg(resp.message)
                     getList();
+                    if (resp.status == true) {
+                        navigate("/login");
+                    } else {
+                        navigate("/register");
+                    }
+
                 })
         })
     }
@@ -158,7 +165,7 @@ const Register = () => {
                                     </form>
                                 </div>
                                 <div className="mb-4 text-muted text-center">
-                                    Already Registered? <a href="auth-login.html">Login</a>
+                                    Already Registered? <Link to="/login">Login</Link>
                                 </div>
                             </div>
                         </div>

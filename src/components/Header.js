@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     BrowserRouter as Router,
     Link
 } from "react-router-dom";
-const Header = () => {
-    const Hheader = (
+const Header = (props) => {
+    const [authUser, setauthUser] = useState(JSON.parse(sessionStorage.getItem('loginData')));
+    const [isLogin, setIsLogin] = useState(JSON.parse(sessionStorage.getItem('isLogin')));
+    console.log("LoginauthUser", authUser)
+    // useEffect(() => {
+    //     setauthUser(JSON.parse(sessionStorage.getItem('loginData')));
+    // }, [])
+
+    return (
         <>
-        
             <div className="navbar-bg"></div>
             <nav className="navbar navbar-expand-lg main-navbar sticky">
                 <div className="form-inline mr-auto">
@@ -60,7 +66,7 @@ const Header = () => {
                             </div>
                             <div className="dropdown-list-content dropdown-list-message">
                                 <a href="#" className="dropdown-item"> <span className="dropdown-item-avatar
-											text-white">
+                                        text-white">
                                     <img alt="image" src="assets/img/users/user-1.png" className="rounded-circle" />
                                 </span> <span className="dropdown-item-desc"> <span className="message-user">John
                                     Deo</span>
@@ -127,20 +133,20 @@ const Header = () => {
                             <div className="dropdown-list-content dropdown-list-icons">
                                 <a href="#" className="dropdown-item dropdown-item-unread"> <span
                                     className="dropdown-item-icon bg-primary text-white"> <i className="fas
-												fa-code"></i>
+                                            fa-code"></i>
                                 </span> <span className="dropdown-item-desc"> Template update is
                                     available now! <span className="time">2 Min
                                         Ago</span>
                                     </span>
                                 </a> <a href="#" className="dropdown-item"> <span className="dropdown-item-icon bg-info text-white"> <i className="far
-												fa-user"></i>
+                                            fa-user"></i>
                                 </span> <span className="dropdown-item-desc"> <b>You</b> and <b>Dedik
                                     Sugiharto</b> are now friends <span className="time">10 Hours
                                         Ago</span>
                                     </span>
                                 </a> <a href="#" className="dropdown-item"> <span className="dropdown-item-icon bg-success text-white"> <i
                                     className="fas
-												fa-check"></i>
+                                            fa-check"></i>
                                 </span> <span className="dropdown-item-desc"> <b>Kusnaedi</b> has
                                     moved task <b>Fix bug header</b> to <b>Done</b> <span className="time">12
                                         Hours
@@ -152,7 +158,7 @@ const Header = () => {
                                     clean it! <span className="time">17 Hours Ago</span>
                                     </span>
                                 </a> <a href="#" className="dropdown-item"> <span className="dropdown-item-icon bg-info text-white"> <i className="fas
-												fa-bell"></i>
+                                            fa-bell"></i>
                                 </span> <span className="dropdown-item-desc"> Welcome to Otika
                                     template! <span className="time">Yesterday</span>
                                     </span>
@@ -164,16 +170,17 @@ const Header = () => {
                         </div>
                     </li>
                     <li className="dropdown"><a href="#" data-toggle="dropdown"
-                        className="nav-link dropdown-toggle nav-link-lg nav-link-user"> <img alt="image" src="assets/img/user.png"
-                            className="user-img-radious-style" /> <span className="d-sm-none d-lg-inline-block"></span></a>
+                        className="nav-link dropdown-toggle nav-link-lg nav-link-user">
+                        <img alt="image" src="assets/img/user.png" className="user-img-radious-style" />
+                        <span className="d-sm-none d-lg-inline-block"></span></a>
                         <div className="dropdown-menu dropdown-menu-right pullDown">
-                            <div className="dropdown-title">Hello Sarah Smith</div>
-                            
-                            <Link to="/" className="dropdown-item has-icon">
-                            <i className="far fa-user"></i> Profile
+                            <div className="dropdown-title">Hello {authUser[0].fullname}</div>
+
+                            <Link to={`/profile/${authUser[0].id}`} className="dropdown-item has-icon">
+                                <i className="far fa-user"></i> Profile
                             </Link>
                             <Link to="/register" className="dropdown-item has-icon">
-                            <i className="far fa-user"></i> Register
+                                <i className="far fa-user"></i> Register
                             </Link>
                             <a href="/" className="dropdown-item has-icon"> <i className="fas fa-bolt"></i>
                                 Activities
@@ -491,12 +498,7 @@ const Header = () => {
                 </aside>
             </div>
         </>
-    );
-    return (
-        <>
-        {Hheader}
-        </>
-        
+
     )
 }
 

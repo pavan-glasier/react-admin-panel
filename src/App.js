@@ -1,32 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 // import Basicform from "./components/forms/Basicform";
 import Dashboard from "./components/Dashboard";
 import Basicform from "./components/forms/Basicform";
 import FormLocal from "./components/forms/FormLocal";
 // import Header from "./components/Header";
 // import Footer from "./components/Footer";
+// import $ from 'jquery';
 
 import {
-  BrowserRouter,
   Routes,
   Route
 } from "react-router-dom";
 import Formdemo from "./components/Formdemo";
 import Localdemo from "./components/Localdemo";
-// import Login from "./Authentication/Login";
+import Login from "./Authentication/Login";
 import Register from "./Authentication/Register";
+import Profile from "./Authentication/Profile";
 // import { useNavigate } from "react-router-dom";
 
-
 function App() {
-  // let navigate = useNavigate();
-        // navigate("/home");
   return (
     <>
-
-      <BrowserRouter>
-        {/* <Login /> */}
-        {/* <Header /> */}
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/dashboard" element={<Dashboard />} />
@@ -35,10 +29,9 @@ function App() {
           <Route path="/demo-form" element={<Formdemo />} />
           <Route path="/local-demo" element={<Localdemo />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/profile/:id" element={<Profile />} />
         </Routes>
-        {/* <Footer /> */}
-      </BrowserRouter>
-      {/* <button onClick={handleClick}>Click to navigate about page</button> */}
     </>
   );
 }
