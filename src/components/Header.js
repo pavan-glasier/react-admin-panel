@@ -67,27 +67,27 @@ const Header = (props) => {
                             <div className="dropdown-list-content dropdown-list-message">
                                 <a href="#" className="dropdown-item"> <span className="dropdown-item-avatar
                                         text-white">
-                                    <img alt="image" src="assets/img/users/user-1.png" className="rounded-circle" />
+                                    <img alt="image" src={`${props.img ? props.img:''}assets/img/users/user-1.png`} className="rounded-circle" />
                                 </span> <span className="dropdown-item-desc"> <span className="message-user">John
                                     Deo</span>
                                         <span className="time messege-text">Please check your mail !!</span>
                                         <span className="time">2 Min Ago</span>
                                     </span>
                                 </a> <a href="#" className="dropdown-item"> <span className="dropdown-item-avatar text-white">
-                                    <img alt="image" src="assets/img/users/user-2.png" className="rounded-circle" />
+                                    <img alt="image" src={`${props.img ? props.img:''}assets/img/users/user-2.png`} className="rounded-circle" />
                                 </span> <span className="dropdown-item-desc"> <span className="message-user">Sarah
                                     Smith</span> <span className="time messege-text">Request for leave
                                         application</span>
                                         <span className="time">5 Min Ago</span>
                                     </span>
                                 </a> <a href="#" className="dropdown-item"> <span className="dropdown-item-avatar text-white">
-                                    <img alt="image" src="assets/img/users/user-5.png" className="rounded-circle" />
+                                    <img alt="image" src={`${props.img ? props.img:''}assets/img/users/user-5.png`} className="rounded-circle" />
                                 </span> <span className="dropdown-item-desc"> <span className="message-user">Jacob
                                     Ryan</span> <span className="time messege-text">Your payment invoice is
                                         generated.</span> <span className="time">12 Min Ago</span>
                                     </span>
                                 </a> <a href="#" className="dropdown-item"> <span className="dropdown-item-avatar text-white">
-                                    <img alt="image" src="assets/img/users/user-4.png" className="rounded-circle" />
+                                    <img alt="image" src={`${props.img ? props.img:''}assets/img/users/user-4.png`} className="rounded-circle" />
                                 </span> <span className="dropdown-item-desc"> <span className="message-user">Lina
                                     Smith</span> <span className="time messege-text">hii John, I have upload
                                         doc
@@ -95,7 +95,7 @@ const Header = (props) => {
                                             Min Ago</span>
                                     </span>
                                 </a> <a href="#" className="dropdown-item"> <span className="dropdown-item-avatar text-white">
-                                    <img alt="image" src="assets/img/users/user-3.png" className="rounded-circle" />
+                                    <img alt="image" src={`${props.img ? props.img:''}assets/img/users/user-3.png`} className="rounded-circle" />
                                 </span> <span className="dropdown-item-desc"> <span className="message-user">Jalpa
                                     Joshi</span> <span className="time messege-text">Please do as specify.
                                         Let me
@@ -103,7 +103,7 @@ const Header = (props) => {
                                             Days Ago</span>
                                     </span>
                                 </a> <a href="#" className="dropdown-item"> <span className="dropdown-item-avatar text-white">
-                                    <img alt="image" src="assets/img/users/user-2.png" className="rounded-circle" />
+                                    <img alt="image" src={`${props.img ? props.img:''}assets/img/users/user-2.png`} className="rounded-circle" />
                                 </span> <span className="dropdown-item-desc"> <span className="message-user">Sarah
                                     Smith</span> <span className="time messege-text">Client Requirements</span>
                                         <span className="time">2 Days Ago</span>
@@ -171,10 +171,10 @@ const Header = (props) => {
                     </li>
                     <li className="dropdown"><a href="#" data-toggle="dropdown"
                         className="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                        <img alt="image" src="assets/img/user.png" className="user-img-radious-style" />
+                        <img alt="image" src={`http://192.168.0.128/REST-API/${authUser[0].pro_img}`} className="user-img-radious-style" />
                         <span className="d-sm-none d-lg-inline-block"></span></a>
-                        <div className="dropdown-menu dropdown-menu-right pullDown">
-                            <div className="dropdown-title">Hello {authUser[0].fullname}</div>
+                        <div className="dropdown-menu dropdown-menu-right pullDown" style={{"width": "max-content"}}>
+                            <div className="dropdown-title">Hello {authUser[0].name}</div>
 
                             <Link to={`/profile/${authUser[0].id}`} className="dropdown-item has-icon">
                                 <i className="far fa-user"></i> Profile
@@ -202,7 +202,7 @@ const Header = (props) => {
                 <aside id="sidebar-wrapper">
                     <div className="sidebar-brand">
                         <Link to="/">
-                            <img alt="image" src="assets/img/logo.png" className="header-logo" />
+                            <img alt="image" src={`${props.img ? props.img:''}assets/img/logo.png`} className="header-logo" />
                             <span className="logo-name"> Otika</span>
                         </Link>
                     </div>

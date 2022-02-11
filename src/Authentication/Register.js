@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 
-// import axios from 'axios';
+import axios from 'axios';
 const Register = () => {
     let navigate = useNavigate();
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -11,61 +11,64 @@ const Register = () => {
     const [msg, setMsg] = useState('');
     console.log(authUser);
 
-    useEffect(() => {
-        getList();
-    }, [])
+    // useEffect(() => {
+    //     getList();
+    // }, [])
 
-    const getList = () => {
-        fetch("http://192.168.0.128/php-rest-api/register-fetch-all.php")
-            .then((result) => {
-                result.json()
-                    .then((resp) => {
-                        console.log("register-fetch-all", resp)
-                        setauthUser(localStorage.setItem('registerData', JSON.stringify(resp)));
-                        setMsg(resp.message)
-                    })
-            })
-    }
-    const onSubmit = (formData) => {
+    // const getList = () => {
+    //     fetch("http://localhost/REST-API/fetch-api.php")
+    //         .then((result) => {
+    //             result.json()
+    //                 .then((resp) => {
+    //                     console.log("register-fetch-all", resp)
+    //                     setauthUser(localStorage.setItem('registerData', JSON.stringify(resp)));
+    //                     setMsg(resp.message)
+    //                 })
+    //         })
+    // }
+    const onSubmit = (data) => {
 
-        // if (formData) {
-        //     let fdata = [];
-        //     fdata = JSON.parse(sessionStorage.getItem('registerData')) || [];
-        //     fdata.push(formData);
-        //     sessionStorage.setItem('registerData', JSON.stringify(fdata));
-        //     setauthUser(JSON.parse(sessionStorage.getItem('registerData')));
-        // }
+        let formData = new FormData();
+        formData.append('name', data.name);
+        formData.append('email', data.email);
+        formData.append('phone', data.phone);
+        formData.append('password', data.password);
 
-        fetch(`http://192.168.0.128/php-rest-api/register-insert.php`, {
+        // fetch(`http://localhost/REST-API/insert-api.php`, {
+        //     method: 'POST',
+        //     headers: {
+        //         'Accept': 'application/json',
+        //         'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify(formData)
+        // }).then((result) => {
+        //     result.json()
+        //         .then((resp) => {
+        //             console.log(resp)
+        //             setMsg(resp.message)
+        //             // getList();
+        //             if (resp.status == true) {
+        //                 navigate("/login");
+        //             } else {
+        //                 navigate("/register");
+        //             }
+
+        //         })
+        // })
+
+        axios({
+            url: 'http://192.168.0.128/REST-API/insert-api.php',
             method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(formData)
-        }).then((result) => {
-            result.json()
-                .then((resp) => {
-                    console.log(resp)
-                    setMsg(resp.message)
-                    getList();
-                    if (resp.status == true) {
-                        navigate("/login");
-                    } else {
-                        navigate("/register");
-                    }
-
-                })
+            data: formData
+        }).then((res) => {
+            console.log("RESPONSE", res);
+            if (res.status == 200) {
+                navigate("/login");
+            } else {
+                navigate("/register");
+            }
         })
     }
-    // const [posts, setPosts] = useState([]);
-
-    // useEffect(() => {
-    //     axios.get('https://jsonplaceholder.typicode.com/posts').then((res) => {
-    //         setPosts(res.data.slice(0, 10));
-    //         console.log(posts);
-    //     })
-    // });
 
     return (
         <>
@@ -87,16 +90,16 @@ const Register = () => {
                                     <form onSubmit={handleSubmit(onSubmit)}>
                                         <div className="row">
                                             <div className="form-group col-6">
-                                                <label htmlFor="fullname">Full Name</label>
+                                                <label htmlFor="name">Full Name</label>
                                                 <input
-                                                    id="fullname"
+                                                    id="name"
                                                     type="text"
                                                     className="form-control"
-                                                    {...register("fullname", { required: true })}
-                                                    name="fullname"
+                                                    {...register("name", { required: true })}
+                                                    name="name"
                                                     autoFocus />
                                                 <div className="invalid-feedback">
-                                                    {errors.fullname?.type === 'required' && "Name is required"}
+                                                    {errors.name?.type === 'required' && "Name is required"}
                                                 </div>
                                             </div>
 

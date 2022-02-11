@@ -5,19 +5,15 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 
 export const Dashboard = () => {
-    let navigate = useNavigate();
 
+    let navigate = useNavigate();
     const [authUser, setauthUser] = useState(JSON.parse(sessionStorage.getItem('loginData')));
     const [isLogin, setIsLogin] = useState(JSON.parse(sessionStorage.getItem('isLogin')));
-    // useEffect(() => {
-    //     if (!authUser) {
-    //         navigate("/login");
-    //     }
-    // }, [])
-    if (!authUser) {
-        navigate("/login");
-    }
     console.log("authUserDashboard", authUser);
+     
+    // if(sessionStorage.getItem('isLogin') !== true){
+    //     navigate("/login")
+    // }
     return (
         <>
             <div className="main-wrapper main-wrapper-1" >

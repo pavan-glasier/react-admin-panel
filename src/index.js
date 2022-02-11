@@ -7,9 +7,11 @@ import {
 } from "react-router-dom";
 
 ReactDOM.render(
+  <React.StrictMode>
   <BrowserRouter>
     <App />
-    </BrowserRouter>,
+    </BrowserRouter>
+    </React.StrictMode>,
   document.getElementById('app')
 );
 

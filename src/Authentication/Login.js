@@ -12,7 +12,6 @@ const Login = () => {
     console.log(authUser);
 
     const onSubmit = (formData) => {
-        console.log("formData", formData);
         // let fdata = [];
         // fdata = JSON.parse(localStorage.getItem('formData')) || [];
         // fdata.push(formData);
@@ -21,7 +20,7 @@ const Login = () => {
         // setauthUser(JSON.parse(sessionStorage.getItem('formData')));
         // setIsLogin(JSON.parse(sessionStorage.getItem('isLogin')))
 
-        fetch(`http://192.168.0.128/php-rest-api/login-fetch.php`, {
+        fetch(`http://192.168.0.128/REST-API/login-fetch.php`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

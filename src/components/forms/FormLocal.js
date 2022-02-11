@@ -142,8 +142,8 @@ export const FormLocal = () => {
 
                                                 <div className="form-group col-6">
                                                     <label>Skills</label>
-                                                    <div class="pretty p-default">
-                                                        <div class="state p-success">
+                                                    <div className="pretty p-default">
+                                                        <div className="state p-success">
                                                         <input 
                                                         id='html'
                                                         type="checkbox"
@@ -152,8 +152,8 @@ export const FormLocal = () => {
                                                         </div>
                                                     </div>
 
-                                                    <div class="pretty p-default">
-                                                        <div class="state p-success">
+                                                    <div className="pretty p-default">
+                                                        <div className="state p-success">
                                                         <input 
                                                         id='css'
                                                         type="checkbox"
@@ -162,8 +162,8 @@ export const FormLocal = () => {
                                                         </div>
                                                     </div>
 
-                                                    <div class="pretty p-default">
-                                                        <div class="state p-success">
+                                                    <div className="pretty p-default">
+                                                        <div className="state p-success">
                                                         <input 
                                                         id='js'
                                                         type="checkbox"
