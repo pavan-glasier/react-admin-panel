@@ -1,9 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
     BrowserRouter as Router,
     Link
 } from "react-router-dom";
 const Footer = () => {
+
+    
     return (
         <>
             <footer className="main-footer">
@@ -13,6 +15,7 @@ const Footer = () => {
                 <div className="footer-right">
                 </div>
             </footer>
+            
         </>
     )
 }

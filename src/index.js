@@ -8,8 +8,8 @@ import {
 
 ReactDOM.render(
   <React.StrictMode>
-  <BrowserRouter>
-    <App />
+    <BrowserRouter>
+      <App />
     </BrowserRouter>
     </React.StrictMode>,
   document.getElementById('app')

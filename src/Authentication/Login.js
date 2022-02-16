@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, Navigate } from 'react-router-dom';
 
 const Login = () => {
     let navigate = useNavigate();
@@ -9,7 +9,8 @@ const Login = () => {
     const [authUser, setauthUser] = useState(JSON.parse(sessionStorage.getItem('loginData')));
     const [isLogin, setIsLogin] = useState(JSON.parse(sessionStorage.getItem('isLogin')));
     const [msg, setMsg] = useState('');
-    console.log(authUser);
+
+    const API_URL = process.env.REACT_APP_API_PATH
 
     const onSubmit = (formData) => {
         // let fdata = [];
@@ -20,7 +21,7 @@ const Login = () => {
         // setauthUser(JSON.parse(sessionStorage.getItem('formData')));
         // setIsLogin(JSON.parse(sessionStorage.getItem('isLogin')))
 
-        fetch(`http://192.168.0.128/REST-API/login-fetch.php`, {
+        fetch(`${API_URL}login-fetch.php`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -32,16 +33,20 @@ const Login = () => {
                 .then((resp) => {
                     console.log(resp);
                     setMsg(resp.message);
-                    setauthUser(sessionStorage.setItem('loginData', JSON.stringify(resp)));
-                    setIsLogin(sessionStorage.setItem('isLogin', true));
-                    if (resp.status !== false) {
+                    sessionStorage.setItem('loginData', JSON.stringify(resp));
+                    sessionStorage.setItem('isLogin', true)
+                    setauthUser(JSON.parse(sessionStorage.getItem('loginData')))
+                    setIsLogin(sessionStorage.getItem('isLogin'));
+                    // if (isLogin) {
                         navigate("/dashboard");
-                    }
+                    // }
                 })
         })
     }
     return (
         <>
+        {
+            isLogin ? <Navigate replace to="/dashboard" /> :
             <section className="section">
                 <div className="container mt-5">
                     <div className="row">
@@ -108,6 +113,7 @@ const Login = () => {
                     </div>
                 </div>
             </section>
+        }
         </>
     )
 

@@ -16,13 +16,14 @@ import Localdemo from "./components/Localdemo";
 import Login from "./Authentication/Login";
 import Register from "./Authentication/Register";
 import Profile from "./Authentication/Profile";
+import TestingForm from "./components/forms/TestingForm";
 // import { useNavigate } from "react-router-dom";
 
 function App() {
   return (
     <>
         <Routes>
-          <Route path="/" element={<Dashboard />} />
+          <Route path="/test" element={<TestingForm />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/basic-form" element={<Basicform />} />
           <Route path="/local-form" element={<FormLocal />} />
@@ -30,11 +31,11 @@ function App() {
           <Route path="/local-demo" element={<Localdemo />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/profile/:id" element={<Profile />} />
+          <Route path="/profile/:userId" element={<Profile />} />
+          <Route path="/" element={<Dashboard />} />
         </Routes>
     </>
   );
 }
-
 
 export default App;

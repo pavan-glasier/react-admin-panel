@@ -2,22 +2,40 @@ import React from 'react'
 import Header from './Header'
 import Footer from './Footer';
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, Navigate, useParams } from 'react-router-dom';
 
 export const Dashboard = () => {
-
     let navigate = useNavigate();
     const [authUser, setauthUser] = useState(JSON.parse(sessionStorage.getItem('loginData')));
     const [isLogin, setIsLogin] = useState(JSON.parse(sessionStorage.getItem('isLogin')));
+    const API_URL = process.env.REACT_APP_API_PATH
     console.log("authUserDashboard", authUser);
      
-    // if(sessionStorage.getItem('isLogin') !== true){
-    //     navigate("/login")
-    // }
+    useEffect(() => {
+        getInfo();
+    }, [])
+    const getInfo = () => {
+        fetch(`${API_URL}single-api.php?userId=${authUser[0].id}`)
+        .then((result) => {
+            result.json()
+                .then((resp) => {
+                    console.log("resp",resp);
+                    sessionStorage.setItem('loginData', JSON.stringify(resp));
+                    setauthUser(JSON.parse(sessionStorage.getItem('loginData')));
+                    // setIsLogin(sessionStorage.setItem('isLogin', true));
+                    // if (resp.status !== false) {
+                    //     // navigate("/dashboard");
+                    // }
+                    console.log("authUser", authUser)
+                })
+        })
+    }
+    
     return (
-        <>
+        <>{
+            !isLogin ? <Navigate replace to="/login" />:
             <div className="main-wrapper main-wrapper-1" >
-                <Header authUser={authUser} />
+                <Header authUser={authUser ? authUser: ''} />
                 <div className="main-content">
                     <section className="section">
                         <div className="row ">
@@ -649,6 +667,7 @@ export const Dashboard = () => {
                 </div>
                 <Footer />
             </div>
+        }
         </>
     )
 }

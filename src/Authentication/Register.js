@@ -89,7 +89,7 @@ const Register = () => {
                                 <div className="card-body">
                                     <form onSubmit={handleSubmit(onSubmit)}>
                                         <div className="row">
-                                            <div className="form-group col-6">
+                                            <div className="form-group col-12 col-md-6">
                                                 <label htmlFor="name">Full Name</label>
                                                 <input
                                                     id="name"
@@ -103,7 +103,7 @@ const Register = () => {
                                                 </div>
                                             </div>
 
-                                            <div className="form-group col-6">
+                                            <div className="form-group col-12 col-md-6">
                                                 <label htmlFor="phone">Phone</label>
                                                 <input
                                                     id="phone"
@@ -120,7 +120,7 @@ const Register = () => {
                                         </div>
 
                                         <div className="row">
-                                            <div className="form-group col-6">
+                                            <div className="form-group col-12 col-md-6">
                                                 <label htmlFor="email">Email</label>
                                                 <input
                                                     id="email"
@@ -134,7 +134,7 @@ const Register = () => {
                                                     {errors.email?.type === 'pattern' && "Email is not valid"}
                                                 </div>
                                             </div>
-                                            <div className="form-group col-6">
+                                            <div className="form-group col-12 col-md-6">
                                                 <label htmlFor="password" className="d-block">Password</label>
                                                 <input
                                                     id="password"
