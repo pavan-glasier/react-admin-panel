@@ -7,7 +7,7 @@ class Users extends Component {
         super(props);
         this.state = {
             authUser: JSON.parse(sessionStorage.getItem('loginData')),
-            isLogin : sessionStorage.getItem('isLogin'),
+            isLogin : JSON.parse(sessionStorage.getItem('isLogin')),
             searchData: '',
             dataMsg:'',
             status:'',

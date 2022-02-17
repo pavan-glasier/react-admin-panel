@@ -35,13 +35,14 @@ const Login = (props) => {
                 .then((resp) => {
                     console.log(resp);
                     setMsg(resp.message);
-                    sessionStorage.setItem('loginData', JSON.stringify(resp));
+                    
+                    if (resp.status !== false) {
+                        sessionStorage.setItem('loginData', JSON.stringify(resp));
                     sessionStorage.setItem('isLogin', true)
                     setauthUser(JSON.parse(sessionStorage.getItem('loginData')))
                     setIsLogin(sessionStorage.getItem('isLogin'));
-                    // if (isLogin) {
                         navigate("/dashboard");
-                    // }
+                    }
                 })
         })
     }
