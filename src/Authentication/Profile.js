@@ -127,7 +127,19 @@ export const Profile = (props) => {
     }
     useEffect(() => {
         getInfo();
+        let userName = authUser[0].name;
+        
+        document.title = `Profile | ${toTitleCase(userName)}`
     }, [])
+    
+    const toTitleCase = (phrase) => {
+        return phrase
+          .toLowerCase()
+          .split(' ')
+          .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(' ');
+      };
+      
     const getInfo = () => {
         fetch(`${API_URL}single-api.php?userId=${authUser[0].id}`)
             .then((result) => {
@@ -142,10 +154,12 @@ export const Profile = (props) => {
     }
 
     return (
-        <>{
+        <>
+        
+        {
             !isLogin ? <Navigate replace to="/login" /> :
                 <div className="main-wrapper main-wrapper-1" >
-                    <Header authUser={authUser ? authUser : ''} img="../" />
+                    <Header authUser={authUser ? authUser : ''} img="../" activeClasss={props.name ? props.name : ''}/>
                     <div className="main-content">
                         <section className="section">
                             <div className="section-body">
@@ -156,16 +170,16 @@ export const Profile = (props) => {
                                                 <div className="author-box-center">
                                                     {
                                                         proFile ?
-                                                            proFile.map((file, key) => {
+                                                            proFile.map((file, i) => {
                                                                 return (
-                                                                    <img src={URL.createObjectURL(file)} alt={file.name} className="rounded-circle author-box-picture" />
+                                                                    <img key={i} src={URL.createObjectURL(file)} alt={file.name} className="rounded-circle author-box-picture" />
                                                                 )
                                                             }) : <img alt="image" src={`${API_URL}${authUser[0].pro_img}`} className="rounded-circle author-box-picture" />
                                                     }
 
                                                     <div className="clearfix"></div>
                                                     <div className="author-box-name">
-                                                        <a href="#">{authUser[0].name}</a>
+                                                        <Link to="#">{toTitleCase(authUser[0].name)}</Link>
                                                     </div>
                                                     <div className="author-box-job">Web Developer</div>
                                                 </div>
@@ -229,7 +243,7 @@ export const Profile = (props) => {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className={`card ${skills_array.slice(0, 1).map((skill, i) => skill ? "block" : "d-none")} `}>
+                                        <div className={`card ${skills_array.slice(0, 1).map((skill, i) => skill ? `block-${i}` : "d-none")} `}>
                                             <div className="card-header">
                                                 <h4>Skills</h4>
                                             </div>
@@ -262,7 +276,7 @@ export const Profile = (props) => {
                                                             {
                                                                 galleries.map((gall_img, i) =>
                                                                     <>
-                                                                        <div className="col-4 p-2">
+                                                                        <div className="col-4 p-2" key={i}>
                                                                             <div className="img-body">
                                                                                 <img src={URL.createObjectURL(gall_img)} alt={gall_img.name} className="img-fluid" />
                                                                             </div>
@@ -273,16 +287,16 @@ export const Profile = (props) => {
                                                         </div>
                                                     </div>
                                                 </div> :
-                                                <div className={`card ${gallery_array.slice(0, 1).map((img) => img ? "block" : "d-none")} `}>
+                                                <div className={`card ${gallery_array.slice(0, 1).map((img, i) => img ? `block-${i}` : "d-none")} `}>
                                                     <div className="card-header">
                                                         <h4>Gallery</h4>
                                                     </div>
                                                     <div className="card-body">
                                                         <div className="row">
                                                             {
-                                                                gallery_array.map((img) =>
+                                                                gallery_array.map((img, i) =>
                                                                     <>
-                                                                        <div className="col-4 p-2">
+                                                                        <div className="col-4 p-2" key={i}>
                                                                             <div className="img-body">
                                                                                 <img src={`${API_URL}${img}`} className="img-fluid" />
                                                                             </div>
@@ -450,7 +464,7 @@ export const Profile = (props) => {
                                                                     <label>Skills</label>
                                                                     <div className="row">
                                                                         <div className="col-md-3 col-sm-12">
-                                                                            <div class="custom-checkbox custom-checkbox-table custom-control">
+                                                                            <div className="custom-checkbox custom-checkbox-table custom-control">
                                                                                 <input
                                                                                     className='custom-control-input'
                                                                                     id='html'
@@ -462,7 +476,7 @@ export const Profile = (props) => {
                                                                             </div>
                                                                         </div>
                                                                         <div className="col-md-3 col-sm-12">
-                                                                            <div class="custom-checkbox custom-checkbox-table custom-control">
+                                                                            <div className="custom-checkbox custom-checkbox-table custom-control">
                                                                                 <input
                                                                                     className='custom-control-input'
                                                                                     id='css'
@@ -475,7 +489,7 @@ export const Profile = (props) => {
                                                                         </div>
 
                                                                         <div className="col-md-3 col-sm-12">
-                                                                            <div class="custom-checkbox custom-checkbox-table custom-control">
+                                                                            <div className="custom-checkbox custom-checkbox-table custom-control">
                                                                                 <input
                                                                                     className='custom-control-input'
                                                                                     id='js'
@@ -487,7 +501,7 @@ export const Profile = (props) => {
                                                                             </div>
                                                                         </div>
                                                                         <div className="col-md-3 col-sm-12">
-                                                                            <div class="custom-checkbox custom-checkbox-table custom-control">
+                                                                            <div className="custom-checkbox custom-checkbox-table custom-control">
                                                                                 <input
                                                                                     className='custom-control-input'
                                                                                     id='php'
@@ -500,7 +514,7 @@ export const Profile = (props) => {
                                                                         </div>
 
                                                                         <div className="col-12">
-                                                                            <div class="custom-checkbox custom-checkbox-table custom-control">
+                                                                            <div className="custom-checkbox custom-checkbox-table custom-control">
                                                                                 <input
                                                                                     className='custom-control-input'
                                                                                     id='other'

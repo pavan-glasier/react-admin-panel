@@ -4,16 +4,17 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 
 import axios from 'axios';
-const Register = () => {
+const Register = (props) => {
     let navigate = useNavigate();
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [authUser, setauthUser] = useState(JSON.parse(localStorage.getItem('registerData')));
     const [msg, setMsg] = useState('');
     console.log(authUser);
 
-    // useEffect(() => {
-    //     getList();
-    // }, [])
+    useEffect(() => {
+        // getList();
+        document.title = props.title
+    }, [])
 
     // const getList = () => {
     //     fetch("http://localhost/REST-API/fetch-api.php")

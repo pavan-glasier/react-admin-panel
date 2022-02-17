@@ -3,15 +3,17 @@ import { useForm } from 'react-hook-form';
 import { useState, useEffect } from "react";
 import { Link, useNavigate, Navigate } from 'react-router-dom';
 
-const Login = () => {
+const Login = (props) => {
     let navigate = useNavigate();
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [authUser, setauthUser] = useState(JSON.parse(sessionStorage.getItem('loginData')));
     const [isLogin, setIsLogin] = useState(JSON.parse(sessionStorage.getItem('isLogin')));
     const [msg, setMsg] = useState('');
-
     const API_URL = process.env.REACT_APP_API_PATH
-
+    useEffect(() => {
+        // getList();
+        document.title = props.title
+    }, [])
     const onSubmit = (formData) => {
         // let fdata = [];
         // fdata = JSON.parse(localStorage.getItem('formData')) || [];

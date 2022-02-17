@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import Header from './Header'
 import Footer from './Footer';
-const Formdemo = () => {
+const Formdemo = (props) => {
 
+  document.title = props.title
   const [name, setName] = useState('');
   const [pwd, setPwd] = useState('');
 

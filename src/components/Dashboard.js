@@ -4,29 +4,30 @@ import Footer from './Footer';
 import { useState, useEffect } from "react";
 import { Link, useNavigate, Navigate, useParams } from 'react-router-dom';
 
-export const Dashboard = () => {
+export const Dashboard = (props) => {
     let navigate = useNavigate();
     const [authUser, setauthUser] = useState(JSON.parse(sessionStorage.getItem('loginData')));
     const [isLogin, setIsLogin] = useState(JSON.parse(sessionStorage.getItem('isLogin')));
     const API_URL = process.env.REACT_APP_API_PATH
-    console.log("authUserDashboard", authUser);
+    // console.log("authUserDashboard", authUser);
      
     useEffect(() => {
         getInfo();
+        document.title = props.title
     }, [])
     const getInfo = () => {
         fetch(`${API_URL}single-api.php?userId=${authUser[0].id}`)
         .then((result) => {
             result.json()
                 .then((resp) => {
-                    console.log("resp",resp);
+                    // console.log("resp",resp);
                     sessionStorage.setItem('loginData', JSON.stringify(resp));
                     setauthUser(JSON.parse(sessionStorage.getItem('loginData')));
                     // setIsLogin(sessionStorage.setItem('isLogin', true));
                     // if (resp.status !== false) {
                     //     // navigate("/dashboard");
                     // }
-                    console.log("authUser", authUser)
+                    // console.log("authUser", authUser)
                 })
         })
     }
@@ -35,7 +36,7 @@ export const Dashboard = () => {
         <>{
             !isLogin ? <Navigate replace to="/login" />:
             <div className="main-wrapper main-wrapper-1" >
-                <Header authUser={authUser ? authUser: ''} />
+                <Header authUser={authUser ? authUser: ''}  activeClasss={props.name ? props.name : ''}/>
                 <div className="main-content">
                     <section className="section">
                         <div className="row ">
@@ -53,7 +54,7 @@ export const Dashboard = () => {
                                                 </div>
                                                 <div className="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
                                                     <div className="banner-img">
-                                                        <img src="assets/img/banner/1.png" alt="" />
+                                                        <img src="/assets/img/banner/1.png" alt="" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -75,7 +76,7 @@ export const Dashboard = () => {
                                                 </div>
                                                 <div className="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
                                                     <div className="banner-img">
-                                                        <img src="assets/img/banner/2.png" alt="" />
+                                                        <img src="/assets/img/banner/2.png" alt="" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -98,7 +99,7 @@ export const Dashboard = () => {
                                                 </div>
                                                 <div className="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
                                                     <div className="banner-img">
-                                                        <img src="assets/img/banner/3.png" alt="" />
+                                                        <img src="/assets/img/banner/3.png" alt="" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -120,7 +121,7 @@ export const Dashboard = () => {
                                                 </div>
                                                 <div className="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
                                                     <div className="banner-img">
-                                                        <img src="assets/img/banner/4.png" alt="" />
+                                                        <img src="/assets/img/banner/4.png" alt="" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -136,16 +137,16 @@ export const Dashboard = () => {
                                         <h4>Revenue chart</h4>
                                         <div className="card-header-action">
                                             <div className="dropdown">
-                                                <a href="#" data-toggle="dropdown" className="btn btn-warning dropdown-toggle">Options</a>
+                                                <Link to="#" data-toggle="dropdown" className="btn btn-warning dropdown-toggle">Options</Link>
                                                 <div className="dropdown-menu">
-                                                    <a href="#" className="dropdown-item has-icon"><i className="fas fa-eye"></i> View</a>
-                                                    <a href="#" className="dropdown-item has-icon"><i className="far fa-edit"></i> Edit</a>
+                                                    <Link to="#" className="dropdown-item has-icon"><i className="fas fa-eye"></i> View</Link>
+                                                    <Link to="#" className="dropdown-item has-icon"><i className="far fa-edit"></i> Edit</Link>
                                                     <div className="dropdown-divider"></div>
-                                                    <a href="#" className="dropdown-item has-icon text-danger"><i className="far fa-trash-alt"></i>
-                                                        Delete</a>
+                                                    <Link to="#" className="dropdown-item has-icon text-danger"><i className="far fa-trash-alt"></i>
+                                                        Delete</Link>
                                                 </div>
                                             </div>
-                                            <a href="#" className="btn btn-primary">View All</a>
+                                            <Link to="#" className="btn btn-primary">View All</Link>
                                         </div>
                                     </div>
                                     <div className="card-body">
@@ -278,7 +279,8 @@ export const Dashboard = () => {
                                     <div className="card-body p-0">
                                         <div className="table-responsive">
                                             <table className="table table-striped">
-                                                <tr>
+                                            <thead>
+                                            <tr>
                                                     <th className="text-center">
                                                         <div className="custom-checkbox custom-checkbox-table custom-control">
                                                             <input type="checkbox" data-checkboxes="mygroup" data-checkbox-role="dad"
@@ -294,7 +296,9 @@ export const Dashboard = () => {
                                                     <th>Priority</th>
                                                     <th>Action</th>
                                                 </tr>
-                                                <tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
                                                     <td className="p-0 text-center">
                                                         <div className="custom-checkbox custom-control">
                                                             <input type="checkbox" data-checkboxes="mygroup" className="custom-control-input"
@@ -306,13 +310,13 @@ export const Dashboard = () => {
                                                     <td className="text-truncate">
                                                         <ul className="list-unstyled order-list m-b-0 m-b-0">
                                                             <li className="team-member team-member-sm"><img className="rounded-circle"
-                                                                src="assets/img/users/user-8.png" alt="user" data-toggle="tooltip" title=""
+                                                                src="/assets/img/users/user-8.png" alt="user" data-toggle="tooltip" title=""
                                                                 data-original-title="Wildan Ahdian" /></li>
                                                             <li className="team-member team-member-sm"><img className="rounded-circle"
-                                                                src="assets/img/users/user-9.png" alt="user" data-toggle="tooltip" title=""
+                                                                src="/assets/img/users/user-9.png" alt="user" data-toggle="tooltip" title=""
                                                                 data-original-title="John Deo" /></li>
                                                             <li className="team-member team-member-sm"><img className="rounded-circle"
-                                                                src="assets/img/users/user-10.png" alt="user" data-toggle="tooltip" title=""
+                                                                src="/assets/img/users/user-10.png" alt="user" data-toggle="tooltip" title=""
                                                                 data-original-title="Sarah Smith" /></li>
                                                             <li className="avatar avatar-sm"><span className="badge badge-primary">+4</span></li>
                                                         </ul>
@@ -328,7 +332,7 @@ export const Dashboard = () => {
                                                     <td>
                                                         <div className="badge badge-success">Low</div>
                                                     </td>
-                                                    <td><a href="#" className="btn btn-outline-primary">Detail</a></td>
+                                                    <td><Link to="#" className="btn btn-outline-primary">Detail</Link></td>
                                                 </tr>
                                                 <tr>
                                                     <td className="p-0 text-center">
@@ -342,12 +346,12 @@ export const Dashboard = () => {
                                                     <td className="text-truncate">
                                                         <ul className="list-unstyled order-list m-b-0 m-b-0">
                                                             <li className="team-member team-member-sm">
-                                                                <img className="rounded-circle" src="assets/img/users/user-1.png" alt="user" data-toggle="tooltip" title=""
+                                                                <img className="rounded-circle" src="/assets/img/users/user-1.png" alt="user" data-toggle="tooltip" title=""
                                                                     data-original-title="Wildan Ahdian" />
                                                             </li>
                                                             <li className="team-member team-member-sm" >
                                                                 <img className="rounded-circle"
-                                                                    src="assets/img/users/user-2.png" alt="user" data-toggle="tooltip" title=""
+                                                                    src="/assets/img/users/user-2.png" alt="user" data-toggle="tooltip" title=""
                                                                     data-original-title="John Deo" />
                                                             </li>
                                                             <li className="avatar avatar-sm"><span className="badge badge-primary">+2</span></li>
@@ -364,7 +368,7 @@ export const Dashboard = () => {
                                                     <td>
                                                         <div className="badge badge-danger">High</div>
                                                     </td>
-                                                    <td><a href="#" className="btn btn-outline-primary">Detail</a></td>
+                                                    <td><Link to="#" className="btn btn-outline-primary">Detail</Link></td>
                                                 </tr>
                                                 <tr>
                                                     <td className="p-0 text-center">
@@ -379,13 +383,13 @@ export const Dashboard = () => {
                                                         <ul className="list-unstyled order-list m-b-0 m-b-0">
                                                             <li className="team-member team-member-sm">
                                                                 <img className="rounded-circle"
-                                                                    src="assets/img/users/user-3.png" alt="user" data-toggle="tooltip" title=""
+                                                                    src="/assets/img/users/user-3.png" alt="user" data-toggle="tooltip" title=""
                                                                     data-original-title="Wildan Ahdian" /></li>
                                                             <li className="team-member team-member-sm"><img className="rounded-circle"
-                                                                src="assets/img/users/user-4.png" alt="user" data-toggle="tooltip" title=""
+                                                                src="/assets/img/users/user-4.png" alt="user" data-toggle="tooltip" title=""
                                                                 data-original-title="John Deo" /></li>
                                                             <li className="team-member team-member-sm"><img className="rounded-circle"
-                                                                src="assets/img/users/user-5.png" alt="user" data-toggle="tooltip" title=""
+                                                                src="/assets/img/users/user-5.png" alt="user" data-toggle="tooltip" title=""
                                                                 data-original-title="Sarah Smith" /></li>
                                                             <li className="avatar avatar-sm"><span className="badge badge-primary">+3</span></li>
                                                         </ul>
@@ -401,7 +405,7 @@ export const Dashboard = () => {
                                                     <td>
                                                         <div className="badge badge-info">Average</div>
                                                     </td>
-                                                    <td><a href="#" className="btn btn-outline-primary">Detail</a></td>
+                                                    <td><Link to="#" className="btn btn-outline-primary">Detail</Link></td>
                                                 </tr>
                                                 <tr>
                                                     <td className="p-0 text-center">
@@ -415,10 +419,10 @@ export const Dashboard = () => {
                                                     <td className="text-truncate">
                                                         <ul className="list-unstyled order-list m-b-0 m-b-0">
                                                             <li className="team-member team-member-sm"><img className="rounded-circle"
-                                                                src="assets/img/users/user-7.png" alt="user" data-toggle="tooltip" title=""
+                                                                src="/assets/img/users/user-7.png" alt="user" data-toggle="tooltip" title=""
                                                                 data-original-title="John Deo" /></li>
                                                             <li className="team-member team-member-sm"><img className="rounded-circle"
-                                                                src="assets/img/users/user-8.png" alt="user" data-toggle="tooltip" title=""
+                                                                src="/assets/img/users/user-8.png" alt="user" data-toggle="tooltip" title=""
                                                                 data-original-title="Sarah Smith" /></li>
                                                             <li className="avatar avatar-sm"><span className="badge badge-primary">+4</span></li>
                                                         </ul>
@@ -434,7 +438,7 @@ export const Dashboard = () => {
                                                     <td>
                                                         <div className="badge badge-success">Low</div>
                                                     </td>
-                                                    <td><a href="#" className="btn btn-outline-primary">Detail</a></td>
+                                                    <td><Link to="#" className="btn btn-outline-primary">Detail</Link></td>
                                                 </tr>
                                                 <tr>
                                                     <td className="p-0 text-center">
@@ -448,13 +452,13 @@ export const Dashboard = () => {
                                                     <td className="text-truncate">
                                                         <ul className="list-unstyled order-list m-b-0 m-b-0">
                                                             <li className="team-member team-member-sm"><img className="rounded-circle"
-                                                                src="assets/img/users/user-9.png" alt="user" data-toggle="tooltip" title=""
+                                                                src="/assets/img/users/user-9.png" alt="user" data-toggle="tooltip" title=""
                                                                 data-original-title="Wildan Ahdian" /></li>
                                                             <li className="team-member team-member-sm"><img className="rounded-circle"
-                                                                src="assets/img/users/user-10.png" alt="user" data-toggle="tooltip" title=""
+                                                                src="/assets/img/users/user-10.png" alt="user" data-toggle="tooltip" title=""
                                                                 data-original-title="John Deo" /></li>
                                                             <li className="team-member team-member-sm"><img className="rounded-circle"
-                                                                src="assets/img/users/user-2.png" alt="user" data-toggle="tooltip" title=""
+                                                                src="/assets/img/users/user-2.png" alt="user" data-toggle="tooltip" title=""
                                                                 data-original-title="Sarah Smith" /></li>
                                                             <li className="avatar avatar-sm"><span className="badge badge-primary">+2</span></li>
                                                         </ul>
@@ -470,7 +474,7 @@ export const Dashboard = () => {
                                                     <td>
                                                         <div className="badge badge-danger">High</div>
                                                     </td>
-                                                    <td><a href="#" className="btn btn-outline-primary">Detail</a></td>
+                                                    <td><Link to="#" className="btn btn-outline-primary">Detail</Link></td>
                                                 </tr>
                                                 <tr>
                                                     <td className="p-0 text-center">
@@ -484,13 +488,13 @@ export const Dashboard = () => {
                                                     <td className="text-truncate">
                                                         <ul className="list-unstyled order-list m-b-0 m-b-0">
                                                             <li className="team-member team-member-sm"><img className="rounded-circle"
-                                                                src="assets/img/users/user-8.png" alt="user" data-toggle="tooltip" title=""
+                                                                src="/assets/img/users/user-8.png" alt="user" data-toggle="tooltip" title=""
                                                                 data-original-title="Wildan Ahdian" /></li>
                                                             <li className="team-member team-member-sm"><img className="rounded-circle"
-                                                                src="assets/img/users/user-9.png" alt="user" data-toggle="tooltip" title=""
+                                                                src="/assets/img/users/user-9.png" alt="user" data-toggle="tooltip" title=""
                                                                 data-original-title="John Deo" /></li>
                                                             <li className="team-member team-member-sm"><img className="rounded-circle"
-                                                                src="assets/img/users/user-10.png" alt="user" data-toggle="tooltip" title=""
+                                                                src="/assets/img/users/user-10.png" alt="user" data-toggle="tooltip" title=""
                                                                 data-original-title="Sarah Smith" /></li>
                                                             <li className="avatar avatar-sm"><span className="badge badge-primary">+4</span></li>
                                                         </ul>
@@ -506,8 +510,28 @@ export const Dashboard = () => {
                                                     <td>
                                                         <div className="badge badge-info">Average</div>
                                                     </td>
-                                                    <td><a href="#" className="btn btn-outline-primary">Detail</a></td>
+                                                    <td><Link to="#" className="btn btn-outline-primary">Detail</Link></td>
                                                 </tr>
+                                            </tbody>
+                                            <tfoot>
+                                            <tr>
+                                                    <th className="text-center">
+                                                        <div className="custom-checkbox custom-checkbox-table custom-control">
+                                                            <input type="checkbox" data-checkboxes="mygroup" data-checkbox-role="dad"
+                                                                className="custom-control-input" id="checkbox-all1" />
+                                                            <label htmlFor="checkbox-all1" className="custom-control-label">&nbsp;</label>
+                                                        </div>
+                                                    </th>
+                                                    <th>Task Name</th>
+                                                    <th>Members</th>
+                                                    <th>Task Status</th>
+                                                    <th>Assigh Date</th>
+                                                    <th>Due Date</th>
+                                                    <th>Priority</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </tfoot>
+                                                
                                             </table>
                                         </div>
                                     </div>
@@ -526,11 +550,11 @@ export const Dashboard = () => {
                                     </div>
                                     <div className="card-body">
                                         <div className="support-ticket media pb-1 mb-3">
-                                            <img src="assets/img/users/user-1.png" className="user-img mr-2" alt="" />
+                                            <img src="/assets/img/users/user-1.png" className="user-img mr-2" alt="" />
                                             <div className="media-body ml-3">
                                                 <div className="badge badge-pill badge-success mb-1 float-right">Feature</div>
                                                 <span className="font-weight-bold">#89754</span>
-                                                <a href="javascript:void(0)">Please add advance table</a>
+                                                <Link to="/#">Please add advance table</Link>
                                                 <p className="my-1">Hi, can you please add new table for advan...</p>
                                                 <small className="text-muted">Created by <span className="font-weight-bold font-13">John
                                                     Deo</span>
@@ -538,11 +562,11 @@ export const Dashboard = () => {
                                             </div>
                                         </div>
                                         <div className="support-ticket media pb-1 mb-3">
-                                            <img src="assets/img/users/user-2.png" className="user-img mr-2" alt="" />
+                                            <img src="/assets/img/users/user-2.png" className="user-img mr-2" alt="" />
                                             <div className="media-body ml-3">
                                                 <div className="badge badge-pill badge-warning mb-1 float-right">Bug</div>
                                                 <span className="font-weight-bold">#57854</span>
-                                                <a href="javascript:void(0)">Select item not working</a>
+                                                <Link to="/#">Select item not working</Link>
                                                 <p className="my-1">please check select item in advance form not work...</p>
                                                 <small className="text-muted">Created by <span className="font-weight-bold font-13">Sarah
                                                     Smith</span>
@@ -550,22 +574,22 @@ export const Dashboard = () => {
                                             </div>
                                         </div>
                                         <div className="support-ticket media pb-1 mb-3">
-                                            <img src="assets/img/users/user-3.png" className="user-img mr-2" alt="" />
+                                            <img src="/assets/img/users/user-3.png" className="user-img mr-2" alt="" />
                                             <div className="media-body ml-3">
                                                 <div className="badge badge-pill badge-primary mb-1 float-right">Query</div>
                                                 <span className="font-weight-bold">#85784</span>
-                                                <a href="javascript:void(0)">Are you provide template in Angular?</a>
+                                                <Link to="/#">Are you provide template in Angular?</Link>
                                                 <p className="my-1">can you provide template in latest angular 8.</p>
                                                 <small className="text-muted">Created by <span className="font-weight-bold font-13">Ashton Cox</span>
                                                     &nbsp;&nbsp; -2 day ago</small>
                                             </div>
                                         </div>
                                         <div className="support-ticket media pb-1 mb-3">
-                                            <img src="assets/img/users/user-6.png" className="user-img mr-2" alt="" />
+                                            <img src="/assets/img/users/user-6.png" className="user-img mr-2" alt="" />
                                             <div className="media-body ml-3">
                                                 <div className="badge badge-pill badge-info mb-1 float-right">Enhancement</div>
                                                 <span className="font-weight-bold">#25874</span>
-                                                <a href="javascript:void(0)">About template page load speed</a>
+                                                <Link to="/#">About template page load speed</Link>
                                                 <p className="my-1">Hi, John, can you work on increase page speed of template...</p>
                                                 <small className="text-muted">Created by <span className="font-weight-bold font-13">Hasan
                                                     Basri</span>
@@ -573,8 +597,8 @@ export const Dashboard = () => {
                                             </div>
                                         </div>
                                     </div>
-                                    <a href="javascript:void(0)" className="card-footer card-link text-center small ">View
-                                        All</a>
+                                    <Link to="/#" className="card-footer card-link text-center small ">View
+                                        All</Link>
                                 </div>
                                 {/* <!-- Support tickets --> */}
                             </div>
@@ -657,6 +681,15 @@ export const Dashboard = () => {
                                                         <td>$128</td>
                                                     </tr>
                                                 </tbody>
+                                                <tfoot>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Client Name</th>
+                                                        <th>Date</th>
+                                                        <th>Payment Method</th>
+                                                        <th>Amount</th>
+                                                    </tr>
+                                                </tfoot>
                                             </table>
                                         </div>
                                     </div>

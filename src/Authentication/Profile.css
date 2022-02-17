@@ -16,3 +16,31 @@
     object-position: center;
     height: 100%;
 }
+.tbl-users{
+    margin-bottom: 0;
+}
+.table:not(.table-sm) tfoot td {
+    border-bottom: none;
+    background-color: rgba(0,0,0,0.04);
+    color: #666;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+.logout-btn{
+    line-height: 10px;
+    height: 40px;
+    display: block;
+
+}
+.logout-btn:active,
+.logout-btn:focus,
+.logout-btn:focus-visible
+{
+    background-color: #f8f9fa;
+    outline: none;
+    border: none;
+}
+.active-nav{
+    color: #6777ef;
+    background-color: #f8f9fa;
+}

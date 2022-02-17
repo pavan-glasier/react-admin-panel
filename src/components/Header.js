@@ -9,17 +9,24 @@ const Header = (props) => {
     const [authUser, setauthUser] = useState(JSON.parse(sessionStorage.getItem('loginData')));
     const [isLogin, setIsLogin] = useState(JSON.parse(sessionStorage.getItem('isLogin')));
     const API_URL = process.env.REACT_APP_API_PATH
-    const logOut = (e) => {
-        e.preventDefault();
-            // sessionStorage.setItem('loginData', JSON.stringify(resp));
-            sessionStorage.setItem('isLogin', false)
-            // setauthUser(JSON.parse(sessionStorage.getItem('loginData')))
-            setIsLogin(sessionStorage.getItem('isLogin'));
-            navigate("/login")
+    const logOut = (id) => {
+        // e.preventDefault();
+        // alert(id);
+        fetch(`${process.env.REACT_APP_API_PATH}update-api.php?logout=${id}`, {
+        }).then((result) => {
+            result.json()
+                .then((resp) => {
+                    // console.log(resp);
+                    sessionStorage.setItem('isLogin', false)
+                    // setauthUser(JSON.parse(sessionStorage.getItem('loginData')))
+                    setIsLogin(sessionStorage.getItem('isLogin'));
+                    navigate("/login")
+
+                })
+        })
+            
     }
     return (
-
-
         <>
             <div className="navbar-bg"></div>
             <nav className="navbar navbar-expand-lg main-navbar sticky">
@@ -184,7 +191,7 @@ const Header = (props) => {
                         <div className="dropdown-menu dropdown-menu-right pullDown" style={{ "width": "max-content" }}>
                             <div className="dropdown-title">Hello {authUser ? authUser[0].name : ''}</div>
 
-                            <Link to={`/profile/${authUser ? authUser[0].id : ''}`} className="dropdown-item has-icon">
+                            <Link to={`/profile/${authUser ? authUser[0].id : ''}`} className={`dropdown-item has-icon ${props.activeClasss === 'profile' ? 'active-nav':null}`}>
                                 <i className="far fa-user"></i> Profile
                             </Link>
                             <Link to="/register" className="dropdown-item has-icon">
@@ -196,9 +203,9 @@ const Header = (props) => {
                                 Settings
                             </a> */}
                             <div className="dropdown-divider"></div>
-                            <Link to="/dddd" onClick={logOut} className="dropdown-item has-icon text-danger">
+                            <button onClick={(id)=>logOut(authUser[0].id)} className="dropdown-item has-icon text-danger logout-btn">
                                 <i className="fas fa-sign-out-alt"></i> Logout
-                            </Link>
+                            </button>
                             {/* <Link to="/" className="dropdown-item has-icon text-danger"><i className="fas fa-sign-out-alt"></i> Home</Link> */}
                         </div>
                     </li>
@@ -216,7 +223,7 @@ const Header = (props) => {
                     </div>
                     <ul className="sidebar-menu">
                         <li className="menu-header">Main</li>
-                        <li className="dropdown active">
+                        <li className={`dropdown ${props.activeClasss === 'dashboard' ? 'active':null}`} >
                             <Link to="/dashboard" className="nav-link">
                                 {/* <i data-feather="monitor"></i> */}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-monitor">
@@ -225,6 +232,17 @@ const Header = (props) => {
                                     <line x1="12" y1="17" x2="12" y2="21"></line>
                                 </svg>
                                 <span>Dashboard</span>
+                            </Link>
+                        </li>
+                        <li className={`dropdown ${props.activeClasss === 'users' ? 'active':null}`}  >
+                            <Link to="/users" className="nav-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-user-check">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2">
+                            </path>
+                            <circle cx="8.5" cy="7" r="4"></circle>
+                            <polyline points="17 11 19 13 23 9"></polyline>
+                            </svg>
+                                <span>All Users</span>
                             </Link>
                         </li>
                         <li className="menu-header">UI Elements</li>
@@ -239,13 +257,24 @@ const Header = (props) => {
                                 <span>Forms</span>
                             </Link>
                             <ul className="dropdown-menu">
-                                <li><Link to="/local-form" className="nav-link">Form Local</Link></li>
-                                <li><Link to="/basic-form" className="nav-link">Basic Form</Link></li>
-                                <li><Link to="/advanced-form" className="nav-link">Advanced Form</Link></li>
-                                <li><Link to="/editor-form" className="nav-link">Editor</Link></li>
-                                <li><Link to="/validation-form" className="nav-link">Validation</Link></li>
-                                <li><Link to="/wizard-form" className="nav-link">Form Wizard</Link></li>
+                                <li className={`${props.activeClasss === 'local-form' ? 'active':null}`}>
+                                <Link to="/local-form" className="nav-link">Form Local</Link>
+                                </li>
+                                <li className={`${props.activeClasss === 'basic-form' ? 'active':null}`}>
+                                <Link to="/basic-form" className="nav-link">Basic Form</Link></li>
                             </ul>
+                        </li>
+                        
+                        <li className={`dropdown ${props.activeClasss === 'test' ? 'active':null}`}>
+                            <Link to="/test" className="nav-link">
+                                {/* <i data-feather="monitor"></i> */}
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-monitor">
+                                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                    <line x1="8" y1="21" x2="16" y2="21"></line>
+                                    <line x1="12" y1="17" x2="12" y2="21"></line>
+                                </svg>
+                                <span>Testing</span>
+                            </Link>
                         </li>
 
                     </ul>

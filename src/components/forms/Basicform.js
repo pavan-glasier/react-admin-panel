@@ -3,7 +3,8 @@ import { useForm } from 'react-hook-form';
 import { useState, useEffect } from "react";
 import Header from '../Header'
 import Footer from '../Footer';
-export const Basicform = () => {
+export const Basicform = (props) => {
+    document.title = props.title
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const [authUser, setauthUser] = useState(JSON.parse(localStorage.getItem('formData')));
@@ -16,11 +17,11 @@ export const Basicform = () => {
         localStorage.setItem('formData', JSON.stringify(fdata));
         setauthUser(JSON.parse(localStorage.getItem('formData')));
     }
-
+    
     return (
         <>
             <div className="main-wrapper main-wrapper-1" >
-                <Header />
+                <Header activeClasss={props.name ? props.name : ''}/>
                 <div className="main-content">
                     <section className="section">
                         <div className="section-body">

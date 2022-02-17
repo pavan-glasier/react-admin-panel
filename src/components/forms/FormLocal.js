@@ -4,8 +4,9 @@ import { useState, useEffect } from "react";
 import Header from '../Header'
 import Footer from '../Footer';
 import axios from 'axios';
-export const FormLocal = () => {
+export const FormLocal = (props) => {
     // const { register, handleSubmit, formState: { errors } } = useForm();
+    document.title = props.title
     const [filess, setFile] = useState([]);
     const onSubmit = (e) => {
         e.preventDefault();
@@ -78,7 +79,7 @@ export const FormLocal = () => {
     return (
         <>
             <div className="main-wrapper main-wrapper-1" >
-                <Header />
+                <Header activeClasss={props.name ? props.name : ''}/>
                 <div className="main-content">
                     <section className="section">
                         <div className="section-body">
