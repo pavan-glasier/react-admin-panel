@@ -3,6 +3,7 @@ import {
     BrowserRouter as Router,
     Link, useNavigate, Navigate
 } from "react-router-dom";
+import FeatherIcon from 'feather-icons-react';
 
 const Header = (props) => {
     let navigate = useNavigate();
@@ -34,19 +35,15 @@ const Header = (props) => {
                     <ul className="navbar-nav mr-3">
                         <li><a href="#" data-toggle="sidebar" className="nav-link nav-link-lg collapse-btn">
                             {/* <i data-feather="align-justify"></i> */}
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-align-justify">
-                                <line x1="21" y1="10" x2="3" y2="10"></line>
-                                <line x1="21" y1="6" x2="3" y2="6"></line>
-                                <line x1="21" y1="14" x2="3" y2="14"></line>
-                                <line x1="21" y1="18" x2="3" y2="18"></line>
-                            </svg>
+                            <FeatherIcon icon="align-justify" />
                         </a>
                         </li>
                         <li><a href="#" className="nav-link nav-link-lg fullscreen-btn">
                             {/* <i data-feather="maximize"></i> */}
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-maximize">
+                            <FeatherIcon icon="maximize" />
+                            {/* <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-maximize">
                                 <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
-                            </svg>
+                            </svg> */}
                         </a></li>
                         <li>
                             <form className="form-inline mr-auto">
@@ -63,10 +60,11 @@ const Header = (props) => {
                 <ul className="navbar-nav navbar-right">
                     <li className="dropdown dropdown-list-toggle">
                         <a href="#" data-toggle="dropdown" className="nav-link nav-link-lg message-toggle">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-mail">
+                        <FeatherIcon icon="mail" />
+                            {/* <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-mail">
                                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                                 <polyline points="22,6 12,13 2,6"></polyline>
-                            </svg>
+                            </svg> */}
                             <span className="badge headerBadge1">
                                 6 </span>
                         </a>
@@ -133,10 +131,11 @@ const Header = (props) => {
                     <li className="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
                         className="nav-link notification-toggle nav-link-lg">
                         {/* <i data-feather="bell" className="bell"></i> */}
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-bell bell">
+                        <FeatherIcon icon="bell" className="bell" />
+                        {/* <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-bell bell">
                             <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
                             <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
-                        </svg>
+                        </svg> */}
                     </a>
                         <div className="dropdown-menu dropdown-list dropdown-menu-right pullDown">
                             <div className="dropdown-header">
@@ -226,22 +225,13 @@ const Header = (props) => {
                         <li className={`dropdown ${props.activeClasss === 'dashboard' ? 'active':null}`} >
                             <Link to="/dashboard" className="nav-link">
                                 {/* <i data-feather="monitor"></i> */}
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-monitor">
-                                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-                                    <line x1="8" y1="21" x2="16" y2="21"></line>
-                                    <line x1="12" y1="17" x2="12" y2="21"></line>
-                                </svg>
+                                <FeatherIcon icon="monitor" />
                                 <span>Dashboard</span>
                             </Link>
                         </li>
                         <li className={`dropdown ${props.activeClasss === 'users' ? 'active':null}`}  >
                             <Link to="/users" className="nav-link">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-user-check">
-                            <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2">
-                            </path>
-                            <circle cx="8.5" cy="7" r="4"></circle>
-                            <polyline points="17 11 19 13 23 9"></polyline>
-                            </svg>
+                            <FeatherIcon icon="users" />
                                 <span>All Users</span>
                             </Link>
                         </li>
@@ -249,11 +239,7 @@ const Header = (props) => {
                         <li className="dropdown">
                             <Link to="#" className="menu-toggle nav-link has-dropdown">
                                 {/* <i data-feather="layout"></i> */}
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-layout">
-                                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                                    <line x1="3" y1="9" x2="21" y2="9"></line>
-                                    <line x1="9" y1="21" x2="9" y2="9"></line>
-                                </svg>
+                                <FeatherIcon icon="layout" />
                                 <span>Forms</span>
                             </Link>
                             <ul className="dropdown-menu">
@@ -268,11 +254,12 @@ const Header = (props) => {
                         <li className={`dropdown ${props.activeClasss === 'test' ? 'active':null}`}>
                             <Link to="/test" className="nav-link">
                                 {/* <i data-feather="monitor"></i> */}
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-monitor">
+                                <FeatherIcon icon="command" />
+                                {/* <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-monitor">
                                     <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
                                     <line x1="8" y1="21" x2="16" y2="21"></line>
                                     <line x1="12" y1="17" x2="12" y2="21"></line>
-                                </svg>
+                                </svg> */}
                                 <span>Testing</span>
                             </Link>
                         </li>

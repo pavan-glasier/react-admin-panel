@@ -5,6 +5,7 @@ import { Link, useNavigate, Navigate } from 'react-router-dom';
 
 const Login = (props) => {
     let navigate = useNavigate();
+    // sessionStorage.setItem('isLogin', false)
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [authUser, setauthUser] = useState(JSON.parse(sessionStorage.getItem('loginData')));
     const [isLogin, setIsLogin] = useState(JSON.parse(sessionStorage.getItem('isLogin')));
@@ -38,9 +39,9 @@ const Login = (props) => {
                     
                     if (resp.status !== false) {
                         sessionStorage.setItem('loginData', JSON.stringify(resp));
-                    sessionStorage.setItem('isLogin', true)
-                    setauthUser(JSON.parse(sessionStorage.getItem('loginData')))
-                    setIsLogin(sessionStorage.getItem('isLogin'));
+                        sessionStorage.setItem('isLogin', true)
+                        setauthUser(JSON.parse(sessionStorage.getItem('loginData')))
+                        setIsLogin(sessionStorage.getItem('isLogin'));
                         navigate("/dashboard");
                     }
                 })
