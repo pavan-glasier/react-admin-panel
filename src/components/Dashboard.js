@@ -21,9 +21,6 @@ export const Dashboard = (props) => {
             data: [11, 32, 67, 32, 44, 52]
         }],
         options: {
-            chart: {
-                type: 'line'
-            },
             dataLabels: {
                 enabled: true,
             },
@@ -143,9 +140,6 @@ export const Dashboard = (props) => {
             data: [11, 32, 67, 32, 44, 52, 41]
         }],
         options: {
-            chart: {
-                type: 'area'
-            },
             dataLabels: {
                 enabled: false,
             },
